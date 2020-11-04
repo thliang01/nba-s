@@ -4,7 +4,7 @@ import numpy as np
 
 # --------------------------------------------------------------
 # Import and clean data
-game_details = pd.read_csv('~/Projects/nba-s/data/games_details.csv')
+game_details = pd.read_csv('games_details.csv')
 print(game_details.head(5))
 game_details.drop(['GAME_ID', 'TEAM_ID', 'PLAYER_ID', 'START_POSITION',
                    'COMMENT', 'TEAM_ABBREVIATION'], axis=1, inplace=True)
