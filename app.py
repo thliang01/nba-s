@@ -19,12 +19,13 @@ game_details = game_details.dropna()
 game_details['MIN'] = game_details['MIN'].str.strip(':').str[0:2]
 df = game_details.copy()
 
-# --------------------------------------------------------------
-# Import and clean data
+if st.checkbox('Show dataframe'):
+    st.write("Players Game Details")
+    st.dataframe(df.head(10))
 
-st.write("Players Game Details")
-st.dataframe(df.head(3))
-# st.code('Hello')
+# --------------------------------------------------------------
+
+st.write("Top 20 Players in the NBA")
 top_activities = df.groupby(by='PLAYER_NAME')['PTS'].sum().sort_values(ascending=False).head(20).reset_index()
 plt.figure(figsize=(15, 10))
 plt.xlabel('POINTS', fontsize=15)
@@ -35,9 +36,10 @@ for i, (value, name) in enumerate(zip(top_activities['PTS'], top_activities['PLA
     ax.text(value, i - .05, f'{value:,.0f}', size=10, ha='left', va='center')
 ax.set(xlabel='POINTS', ylabel='PLAYER_NAME')
 st.pyplot(plt)
-# player = st.multiselect(
-#
-# )
+
+player = st.multiselect(
+    "Choose Player", df['PLAYER_NAME']
+)
 
 st.write("""
 # My first app
